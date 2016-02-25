@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="com.dvd.android.screenshotautodemomode"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:label="Screenshot Auto Demo Mode"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true"/>
+        <meta-data
+            android:name="xposedminversion"
+            android:value="78+"/>
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Auto enable Demo Mode before taking a screenshot"/>
+    </application>
+
+    <!-- created with androidstudio template by dvdandroid -->
+    <!-- http://github.com/dvdandroid/XposedModuleTemplate -->
+
+</manifest>
