@@ -1,4 +1,4 @@
-package com.dvd.android.screenshotautodemomode;
+package com.dvd.xposed.screenshotautodemomode;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

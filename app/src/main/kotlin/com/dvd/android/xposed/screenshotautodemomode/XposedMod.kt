@@ -1,7 +1,8 @@
-package com.dvd.android.screenshotautodemomode
+package com.dvd.android.xposed.screenshotautodemomode
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.os.SystemClock
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
@@ -77,7 +78,7 @@ class XposedMod : IXposedHookLoadPackage {
                 val context = XposedHelpers.getObjectField(param!!.thisObject, "mContext") as Context?
 
                 // wait 1 sec before exiting from demo mode
-                android.os.Handler().postDelayed({ context!!.sendBroadcast(Intent(DEMO_MODE_ACTION).putExtra("command", "exit")) }, 1000)
+                Handler().postDelayed({ context!!.sendBroadcast(Intent(DEMO_MODE_ACTION).putExtra("command", "exit")) }, 1000)
             }
         })
     }
