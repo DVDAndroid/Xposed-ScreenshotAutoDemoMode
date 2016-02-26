@@ -5,3 +5,6 @@ android:
     - platform-tools
     - build-tools-23.0.2
     - android-23
+    
+env:
+  - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
