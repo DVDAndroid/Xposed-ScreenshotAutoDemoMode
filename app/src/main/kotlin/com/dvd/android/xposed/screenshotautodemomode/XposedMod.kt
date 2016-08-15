@@ -2,6 +2,7 @@ package com.dvd.android.xposed.screenshotautodemomode
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.os.SystemClock
 import de.robv.android.xposed.IXposedHookLoadPackage
@@ -60,10 +61,14 @@ class XposedMod : IXposedHookLoadPackage {
 
                 context.sendBroadcast(i)
 
-                // set clock at 06:00 (marshmallow default)
+                // set clock
                 i = Intent(DEMO_MODE_ACTION)
                 i.putExtra("command", "clock")
-                i.putExtra("hhmm", "0600")
+                i.putExtra("hhmm", if (Build.VERSION.SDK_INT == 23) {
+                    "0600"
+                } else {
+                    "0700"
+                })
 
                 context.sendBroadcast(i)
 
