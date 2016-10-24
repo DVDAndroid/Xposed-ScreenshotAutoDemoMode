@@ -75,11 +75,7 @@ class XposedMod : IXposedHookLoadPackage {
             // set clock
             i = Intent(DEMO_MODE_ACTION)
             i.putExtra("command", "clock")
-            i.putExtra("hhmm", if (Build.VERSION.SDK_INT == 23) {
-                "0600"
-            } else {
-                "0700"
-            })
+            i.putExtra("hhmm", getAndroidVersion())
 
             context.sendBroadcast(i)
 
@@ -100,7 +96,7 @@ class XposedMod : IXposedHookLoadPackage {
 
     @Throws(Throwable::class)
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) {
-        if (!lpparam!!.packageName.equals("android"))
+        if (lpparam!!.packageName != "android")
             return
 
         if (Build.VERSION.SDK_INT >= 24) {
@@ -108,6 +104,25 @@ class XposedMod : IXposedHookLoadPackage {
         } else {
             XposedHelpers.findAndHookMethod(PHONE_WINDOW_MANAGER_CLASS, lpparam.classLoader, "takeScreenshot", hook)
         }
+    }
+
+    fun getAndroidVersion(): String {
+        val version = Build.VERSION.RELEASE
+        val digits = version.split(".")
+
+        var result = ""
+
+        if (digits[0].length == 1) result += "0"
+
+        result += digits[0]
+
+        if (digits.size > 2) {
+            result += digits[1] + digits[2]
+        } else {
+            result += digits[1] + "0"
+        }
+
+        return result
     }
 
 }
